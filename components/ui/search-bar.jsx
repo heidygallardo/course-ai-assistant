@@ -6,7 +6,8 @@ import {
   IconButton,
   Group
 } from '@chakra-ui/react'
-import { RiSearchLine } from 'react-icons/ri'
+import { RiArrowUpLine } from 'react-icons/ri'
+
 import { useState } from 'react'
 
 export function SearchBar() {
@@ -56,7 +57,7 @@ export function SearchBar() {
           borderRadius="full"
           colorScheme="blue"
         >
-          <RiSearchLine />
+          <RiArrowUpLine />
         </IconButton>
       </Box>
     </Box>
