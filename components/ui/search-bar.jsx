@@ -21,8 +21,7 @@ export function SearchBar() {
     
     const newMessage = {
       id: Date.now(),
-      text: query,
-      timestamp: new Date().toLocaleTimeString()
+      text: query
     }
     
     setMessages(prev => [...prev, newMessage])

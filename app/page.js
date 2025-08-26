@@ -1,6 +1,5 @@
 import { Box, Heading, VStack } from "@chakra-ui/react";
 import { MainLayout } from "../components/layout/main-layout";
-import { ZoomLinks } from "../components/features/zoom-links";
 import { SearchBar } from "../components/ui/search-bar";
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
               </Heading>
             </Box>
             
-            <ZoomLinks />
           </VStack>
         </Box>
         

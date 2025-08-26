@@ -1,35 +1,34 @@
-'use client'
+"use client";
 
-import { 
-  Box, 
-  VStack, 
-  IconButton, 
-  Text, 
-  HStack,
-  Separator
-} from '@chakra-ui/react'
 import {
-  DrawerActionTrigger,
+  Box,
+  VStack,
+  IconButton,
+  Text,
+  HStack,
+  Separator,
+} from "@chakra-ui/react";
+import {
   DrawerBackdrop,
   DrawerBody,
   DrawerContent,
   DrawerRoot,
-} from '@chakra-ui/react'
-import { 
-  RiMenuLine, 
-  RiHomeLine, 
-  RiCalendarLine, 
+} from "@chakra-ui/react";
+import {
+  RiMenuLine,
+  RiHomeLine,
+  RiCalendarLine,
   RiVideoLine,
-  RiSearchLine 
-} from 'react-icons/ri'
-import { useState } from 'react'
+} from "react-icons/ri";
+import { useState } from "react";
+import Link from "next/link";
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const menuItems = [
-    { name: 'Dashboard', icon: RiHomeLine },
-    { name: 'Assignments', icon: RiCalendarLine },
-    { name: 'Zoom Links', icon: RiVideoLine },
-  ]
+    { name: "Dashboard", icon: RiHomeLine, href: "/" },
+    { name: "Assignments", icon: RiCalendarLine, href: "/assignments" },
+    { name: "Zoom Links", icon: RiVideoLine, href: "/zoom-links" },
+  ];
 
   return (
     <Box
@@ -47,34 +46,41 @@ const SidebarContent = ({ onClose, ...rest }) => {
             Fellow AI Assistant
           </Text>
         </Box>
-        
+
         <Separator />
-        
+
         <VStack align="stretch" spacing={1} p={4}>
           {menuItems.map((item) => (
-            <HStack
-              key={item.name}
-              p={3}
-              borderRadius="md"
-              cursor="pointer"
-              _hover={{ bg: 'gray.100' }}
-              transition="background 0.2s"
-            >
-              <item.icon size={20} />
-              <Text fontSize="sm" fontWeight="medium">
-                {item.name}
-              </Text>
-            </HStack>
+            <Link href={item.href}>
+              <HStack
+                key={item.name}
+                p={3}
+                borderRadius="md"
+                cursor="pointer"
+                _hover={{ bg: "gray.100" }}
+                transition="background 0.2s"
+              >
+                <item.icon size={20} />
+
+                <Text fontSize="sm" fontWeight="medium">
+                  {item.name}
+                </Text>
+              </HStack>
+            </Link>
           ))}
         </VStack>
       </VStack>
     </Box>
-  )
-}
+  );
+};
 
 const MobileSidebar = ({ isOpen, onClose }) => {
   return (
-    <DrawerRoot open={isOpen} onOpenChange={({ open }) => !open && onClose()} placement="start">
+    <DrawerRoot
+      open={isOpen}
+      onOpenChange={({ open }) => !open && onClose()}
+      placement="start"
+    >
       <DrawerBackdrop />
       <DrawerContent>
         <DrawerBody p={0}>
@@ -82,24 +88,24 @@ const MobileSidebar = ({ isOpen, onClose }) => {
         </DrawerBody>
       </DrawerContent>
     </DrawerRoot>
-  )
-}
+  );
+};
 
 export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const onOpen = () => setIsOpen(true)
-  const onClose = () => setIsOpen(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
 
   return (
     <>
-      <SidebarContent 
+      <SidebarContent
         onClose={onClose}
-        display={{ base: 'none', md: 'block' }}
+        display={{ base: "none", md: "block" }}
       />
       <MobileSidebar isOpen={isOpen} onClose={onClose} />
-      
+
       <IconButton
-        display={{ base: 'flex', md: 'none' }}
+        display={{ base: "flex", md: "none" }}
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
@@ -111,5 +117,5 @@ export function Sidebar() {
         <RiMenuLine />
       </IconButton>
     </>
-  )
+  );
 }
